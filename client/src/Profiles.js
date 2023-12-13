@@ -12,7 +12,7 @@ function Profiles({platform,link,logo,username}) {
             <h2 className='text-md font-semibold text-gray-700 whitespace-nowrap'>{username}</h2>
             <h4 className='text-xs text-gray-400'>{platform}</h4>
             <a href={link} target="_blank" rel="noreferrer">
-                <button className='border-2 border-gray-400 mt-2 py-1 px-4 rounded-full flex flex-row items-center'>
+                <button className='border-2 border-gray-400 mt-2 py-1 px-4 rounded-full flex flex-row items-center hover:bg-gray-200'>
                     <FaPlus className='pr-1' />Follow
                 </button>
             </a>
