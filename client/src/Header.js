@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import HeaderOption from './HeaderOption';
 import HomeIcon from '@mui/icons-material/Home';
@@ -9,7 +9,9 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 
-function header() {
+function Header() {
+  const [page, setPage] = useState('Home');
+
   return (
     <div className=' top-0 sticky flex justify-center border-b-[0.1px] border-solid border-gray-300 w-full z-50 h-14 bg-white'>
       <div className='max-w-[1130px] w-full top-0 sticky flex justify-between px-2'>
@@ -25,11 +27,11 @@ function header() {
 
         <div className='flex flex-row'>
           <div className="flex border-gray-200 border-r-[1px]">
-            <HeaderOption Icon={HomeIcon} title='Home'/>
-            <HeaderOption Icon={SupervisorAccountIcon} title='My Network'/>
-            <HeaderOption Icon={BusinessCenterIcon} title='Jobs'/>
-            <HeaderOption Icon={ChatIcon} title='Messaging'/>
-            <HeaderOption Icon={NotificationsIcon} title='Notifications'/>
+            <HeaderOption Icon={HomeIcon} title='Home' page={page} setPage={setPage}/>
+            <HeaderOption Icon={SupervisorAccountIcon} title='My Network' page={page} setPage={setPage}/>
+            <HeaderOption Icon={BusinessCenterIcon} title='Jobs' page={page} setPage={setPage}/>
+            <HeaderOption Icon={ChatIcon} title='Messaging' page={page} setPage={setPage}/>
+            <HeaderOption Icon={NotificationsIcon} title='Notifications' page={page} setPage={setPage}/>
             <HeaderOption avatar ="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4" title='Me'/>
           </div>
           <div className='flex items-start pl-2'>
@@ -46,4 +48,4 @@ function header() {
   )
 }
 
-export default header
+export default Header
