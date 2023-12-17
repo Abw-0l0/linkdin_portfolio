@@ -5,6 +5,7 @@ import MyNetwork from "./network/MyNetwork";
 import Jobs from "./jobs/Jobs";
 import Messaging from "./message/Messaging";
 import Notifications from "./notification/Notifications";
+import Signuppage from "./signup/Signuppage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/jobs" element={<Jobs/>} />
         <Route path="/messaging" element={<Messaging/>} />
         <Route path="/notifications" element={<Notifications/>} />
+        <Route path="/signup" element={<Signuppage/>} />
       </Routes>
     </div>
   );

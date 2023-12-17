@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import Posted from "./Posted";
 
-const arr = ["a", "a", "a", "a", "a", "a", "a", "a", "a"];
-
 function Feed() {
+  const [uploadedData, setUploadedData] = useState([]);
+
+  useEffect(() => {
+    // axios.get('/get').then(result => setUploadedData(result.data)).catch(err => console.log(err))
+  },[])
+
   return (
     <div className="flex flex-grow-1 flex-shrink-1 basis-[51%] flex-col">
       <Post />
@@ -14,14 +18,17 @@ function Feed() {
         <p className="flex flex-row whitespace-nowrap ml-2 text-xs items-center">
           Sort by:
           <span className="cursor-pointer flex flex-row whitespace-nowrap font-semibold text-gray-800 ml-1 text-xs items-center">
-            Top
+            Projects
             <ArrowDropDownOutlinedIcon className="-ml-[2px]" />
           </span>
         </p>
       </div>
-      {arr.map((a) => (
-        <Posted />
-      ))}
+      {uploadedData?
+      uploadedData.map((a,i) => (
+        <Posted key={i} text={a.message}/>
+      )):
+      <></>
+      }
     </div>
   );
 }

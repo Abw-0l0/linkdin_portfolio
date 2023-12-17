@@ -5,10 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 function HeaderOption({ avatar,  Icon, title, page, setPage }) {
   const navigate = useNavigate();
-  console.log(page,title);
 
   const RouteChange = () => {
-
     if(title==="Home"){
       navigate('/')
       setPage('Home')
@@ -28,6 +26,9 @@ function HeaderOption({ avatar,  Icon, title, page, setPage }) {
     else if(title==="Notifications"){
       navigate('/notifications')
       setPage('Notifications')
+    }
+    else {
+      setPage("")
     }
   }
   return (

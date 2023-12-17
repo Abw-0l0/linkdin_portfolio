@@ -8,12 +8,19 @@ import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const [page, setPage] = useState('Home');
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/signup')
+    setPage("");
+  }
 
   return (
-    <div className=' top-0 sticky flex justify-center border-b-[0.1px] border-solid border-gray-300 w-full z-50 h-14 bg-white'>
+    <div className=' top-0 sticky flex justify-center border-b-[0.1px] border-solid border-gray-300 w-full z-50 h-[53px] bg-white'>
       <div className='max-w-[1130px] w-full top-0 sticky flex justify-between px-2'>
 
         <div className="flex  py-[10px]">
@@ -37,9 +44,10 @@ function Header() {
           <div className='flex items-start pl-2'>
             <div className=' flex flex-col object-contain items-center w-[85px] py-[10px] text-gray-500 hover:text-black cursor-pointer -mt-1'>
               <AppsOutlinedIcon className='object-contain h-6 w-6'/>
-              <h3 className='text-xs -mr-1'>For Business<ArrowDropDownOutlinedIcon className='-ml-[2px]' /></h3>
+              <h3 className='text-xs -mr-1 -mt-1'>For Business<ArrowDropDownOutlinedIcon className='-ml-[2px]' /></h3>
             </div>
-            <p className='text-center text-[12px] text-lime-900 underline self-center pl-3'>Try premium for<br/> PKR0</p>
+            {/* <p className='text-center text-[12px] text-lime-900 underline self-center pl-3'>Try premium for<br/> PKR0</p> */}
+            <p className='text-center text-[12px] text-lime-900 underline self-center pl-3'>For full access -<br/> <span onClick={handleClick} className='cursor-pointer hover:text-black'>Login / Signup</span></p>
           </div>
         </div>
 

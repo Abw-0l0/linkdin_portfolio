@@ -6,7 +6,7 @@ import Repost from '@mui/icons-material/Loop';
  import Send from "@mui/icons-material/ArrowForwardSharp"
 import { FaPlus } from 'react-icons/fa'
 
-function Posted() {
+function Posted({text}) {
   return (
     <div className='flex h-fit border-[1px] rounded-lg mb-2 pt-2 pb-1 px-3 w-full flex-col bg-white shadow-sm'>
 
@@ -25,7 +25,7 @@ function Posted() {
 
       <div className='flex flex-col w-full pb-1'>
         <div className='flex pb-2'>
-          <p className='text-sm text-gray-700 font-normal'>Reaching out to people can be intimidating. LinkedIn Premium AI Message Drafts can help you find the right words so you can hit send</p>
+          <p className='text-sm text-gray-700 font-normal'>{text}</p>
         </div>
         <div className='flex w-full object-contain'>
           <img className='rounded-lg' src="https://media.licdn.com/dms/image/D4D16AQHfzYQ4t-da2Q/profile-displaybackgroundimage-shrink_350_1400/0/1701505188371?e=1707955200&v=beta&t=3vZ8ONkR9VJIUTnFPXJMB2vPO9avbrqmCNDsBRBwFqQ" alt="" />

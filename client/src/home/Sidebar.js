@@ -14,11 +14,8 @@ function Sidebar() {
   return (
     <div className="sticky flex flex-col flex-grow-1 flex-shrink-1 basis-[21%] rounded-lg text-center h-fit">
       <div className="flex flex-col object-contain items-center border-[1px] border-gray-300 border-b-0 rounded-t-lg bg-white pb-4">
-        <img
-          className="rounded-t-lg"
-          src="https://media.licdn.com/dms/image/D4D16AQHfzYQ4t-da2Q/profile-displaybackgroundimage-shrink_350_1400/0/1701505188371?e=1707955200&v=beta&t=3vZ8ONkR9VJIUTnFPXJMB2vPO9avbrqmCNDsBRBwFqQ"
-          alt=""
-        />
+        <img className="rounded-t-lg"
+          src="https://media.licdn.com/dms/image/D4D16AQHfzYQ4t-da2Q/profile-displaybackgroundimage-shrink_350_1400/0/1701505188371?e=1707955200&v=beta&t=3vZ8ONkR9VJIUTnFPXJMB2vPO9avbrqmCNDsBRBwFqQ" alt=""/>
         <Avatar
           className="-mt-9 mb-4 border-2 border-white"
           sx={{ width: 70, height: 70 }}
@@ -62,8 +59,8 @@ function Sidebar() {
 
       <div className="text-left border-[1px] border-gray-300 border-b-0 bg-white rounded-t-lg">
         <p className="text-xs p-3">Recent</p>
-        {rec.map((item) => (
-          <Recents title={item.title} url={item.url} />
+        {rec.map((item,i) => (
+          <Recents key={i} title={item.title} url={item.url} />
         ))}
         <p className="py-1"></p>
       </div>
