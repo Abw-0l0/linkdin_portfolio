@@ -9,14 +9,32 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import setAuthToken from './auth/authService';
+import {userActions} from './store/userSlice';
 
-function Header() {
+function Header({setRefresh,refresh}) {
   const [page, setPage] = useState('Home');
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  console.log(user)
 
   const handleClick = () => {
     navigate('/signup')
     setPage("");
+  }
+  
+  const handleClickk = () => {
+    navigate('/signup')
+    setPage("");
+  }
+
+  const handleLogout = () => {
+    setAuthToken(null);
+    localStorage.removeItem('user');
+    dispatch(userActions.clearUser());
   }
 
   return (
@@ -47,7 +65,11 @@ function Header() {
               <h3 className='text-xs -mr-1 -mt-1'>For Business<ArrowDropDownOutlinedIcon className='-ml-[2px]' /></h3>
             </div>
             {/* <p className='text-center text-[12px] text-lime-900 underline self-center pl-3'>Try premium for<br/> PKR0</p> */}
-            <p className='text-center text-[12px] text-lime-900 underline self-center pl-3'>For full access -<br/> <span onClick={handleClick} className='cursor-pointer hover:text-black'>Login / Signup</span></p>
+            {user.user.token.length > 2 ?
+              <p className='text-center text-[12px] text-lime-900 underline self-center pl-3'>{user.user.username} -<br/> <span onClick={handleLogout} className='cursor-pointer hover:text-black'>Logout</span></p>
+            :
+              <p className='text-center text-[12px] text-lime-900 underline self-center pl-3'>For full access -<br/> <span onClick={handleClick} className='cursor-pointer hover:text-black'>Login</span> /<span onClick={handleClickk} className='cursor-pointer hover:text-black'> Signup</span></p>
+            }
           </div>
         </div>
 

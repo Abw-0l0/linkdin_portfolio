@@ -6,11 +6,14 @@ import Jobs from "./jobs/Jobs";
 import Messaging from "./message/Messaging";
 import Notifications from "./notification/Notifications";
 import Signuppage from "./signup/Signuppage";
+import { useState } from "react";
 
 function App() {
+  const [refresh, setRefresh] = useState(false);
+
   return (
     <div className="bg-customColor flex flex-col items-center">
-      <Header />
+      <Header setRefresh={setRefresh} refresh={refresh} />
       <Routes>
         <Route path="/" exact element={<Home/>} />
         <Route path="/mynetwork" element={<MyNetwork/>} />

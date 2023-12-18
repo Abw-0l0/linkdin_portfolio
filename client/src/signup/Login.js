@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import axios from '../axios'
-import setAuthToken from '../auth/authService';
+import { useDispatch } from 'react-redux';
+import {login} from '../store/userSlice'
 
 function Login({setToggel}) {
     const [formData, setFormData] = useState({
@@ -8,6 +8,7 @@ function Login({setToggel}) {
         password: '',
       });
     const [err, setErr] = useState(null);
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,15 +18,8 @@ function Login({setToggel}) {
         e.preventDefault();
         setErr(null)
 
-        try {
-            const response = await axios.post('/user/login', formData);        
-            console.log('Login successful:', response.data);
-            const {token} = response.data
-            setAuthToken(token)
-        } catch (error) {
-            console.error('Error during signup:', error.response.data.error);
-            setErr(error.response.data.error)
-        }
+        dispatch(login(formData))
+
     };
 
     const action = () => {

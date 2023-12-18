@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Signup from './Signup'
 import image from '../images/signuppage.jpg'
 import Login from './Login'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function Signuppage() {
   const [toggle, setToggel] = useState(true)
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(user.user.token.length > 3){
+      navigate('/')
+    }
+  },[user])
 
   return (
     <div className="grid grid-cols-2 w-full bg-white pt-20">
