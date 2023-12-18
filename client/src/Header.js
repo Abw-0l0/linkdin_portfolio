@@ -38,7 +38,7 @@ function Header({setRefresh,refresh}) {
   }
 
   return (
-    <div className=' top-0 sticky flex justify-center border-b-[0.1px] border-solid border-gray-300 w-full z-50 h-[53px] bg-white'>
+    <div className=' top-0 sticky flex justify-center border-b-[0.1px] border-solid border-gray-300 w-full z-30 h-[53px] bg-white'>
       <div className='max-w-[1130px] w-full top-0 sticky flex justify-between px-2'>
 
         <div className="flex  py-[10px]">
