@@ -3,14 +3,20 @@ const mongoose = require( 'mongoose')
 const cors = require( 'cors')
 const PostRoutes = require('./routes/PostRoutes')
 const UserRoutes = require('./routes/UserRoutes')
+const multer = require('multer')
+const bodyParser = require("body-parser");
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 app.use(cors());
-app.use(express.json())
+// app.use(bodyParser.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 
-mongoose.connect('mongodb+srv://abw_0l0:inputstream12@cluster0.em87p35.mongodb.net/')
+  mongoose.connect('mongodb+srv://abw_0l0:inputstream12@cluster0.em87p35.mongodb.net/')
 const db = mongoose.connection;
 
 db.once("open", () => {
@@ -21,3 +27,10 @@ app.listen(port, console.log(`Server is running on http://localhost:${port}`));
 
 app.use('/post',PostRoutes);
 app.use('/user',UserRoutes);
+app.use("/uploads", express.static("uploads"));
+
+// app.use("/upload",upload.single("image"),(req,res)=>{
+//     console.log(req.body);
+//     console.log(req.file);
+//     return res.redirect('/');
+// })

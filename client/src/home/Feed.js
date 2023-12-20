@@ -3,16 +3,31 @@ import Post from "./Post";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import Posted from "./Posted";
 
-function Feed() {
+function Feed({modal, setModal}) {
   const [uploadedData, setUploadedData] = useState([]);
 
-  useEffect(() => {
-    // axios.get('/get').then(result => setUploadedData(result.data)).catch(err => console.log(err))
-  },[])
+  const a = [
+    {
+      first:"",
+      message:"alog"
+    },
+    {
+      second:"",
+      message:"alogg"
+    },
+    {
+      third:"",
+      message:"alogggg"
+    },
+    {
+      fourth:"",
+      message:"aloghhhhhh"
+    },
+  ]
 
   return (
     <div className="flex flex-grow-1 flex-shrink-1 basis-[51%] flex-col">
-      <Post />
+      <Post modal={modal} setModal={setModal}/>
       <div className="my-1 flex flex-row w-full bg-transparent text-gray-400 items-center">
         <hr className="w-full bg-gray-200  h-[2px]" />
         <p className="flex flex-row whitespace-nowrap ml-2 text-xs items-center">
@@ -23,8 +38,8 @@ function Feed() {
           </span>
         </p>
       </div>
-      {uploadedData?
-      uploadedData.map((a,i) => (
+      {a?
+      a.map((a,i) => (
         <Posted key={i} text={a.message}/>
       )):
       <></>

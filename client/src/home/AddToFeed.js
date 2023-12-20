@@ -32,12 +32,12 @@ function AddToFeed() {
           link="https://www.facebook.com/Abw0l0/"
           logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRikuj7BkWDXosqhtK7-dc-LfVJkt8lnZOCU8NEOLwE88Hd2XRuQCSj3YnBo7bMCsmwI5c&usqp=CAU"
         />
-        <Profiles
+        {/* <Profiles
           platform="Soundcloud"
           username="Abdul Basit Wazir"
           link="https://soundcloud.com/user-480073501-636813106"
           logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4FuWmie5IKr3QguWUNH3lcO3fLN1m6k5tNnXkWiK1hkaUALQ2YVfIjoCiGsxYM3878SE&usqp=CAU"
-        />
+        /> */}
       </div>
     </div>
   );

@@ -22,17 +22,13 @@ const postSchema = new mongoose.Schema({
       },
     },
   ],
-  photos: [
-    {
-      url: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  photo: {
+    type: String,
+    // required: true,
+  },
   caption: {
     type: String,
-    required: true,
+    // required: true,
   },
   createdAt: {
     type: Date,

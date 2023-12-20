@@ -3,11 +3,11 @@ import Feed from "./Feed";
 import Sidebar from "./Sidebar"
 import Widgets from "./Widgets"
 
-function home() {
+function home({modal, setModal}) {
   return (
-    <div className="flex mt-5 max-w-[1130px] space-x-6">
+    <div className="flex mt-5 max-w-[1130px] space-x-6 ">
         <Sidebar/>
-        <Feed/>
+        <Feed modal={modal} setModal={setModal}/>
         <Widgets/>
     </div>
 )

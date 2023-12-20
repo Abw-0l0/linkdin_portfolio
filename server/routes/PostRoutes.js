@@ -1,9 +1,22 @@
 const express = require('express');
-const router = express.Router();
 const postController = require('../controllers/PostController');
+const multer = require("multer")
+// import multer from 'multer'
+const router = express.Router();
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../uploads');
+    },
+    filename: function (req, file, cb) {
+      cb(null, date.now()+"-"+file.filename);
+    },
+});
+
+const upload = multer({storage:storage});
 
 // Create a new post
-router.post('/posts', postController.createPost);
+router.post('/posts',upload.single('image'), postController.createPost);
 
 // Get all posts
 router.get('/posts', postController.getAllPosts);

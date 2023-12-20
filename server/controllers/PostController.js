@@ -2,13 +2,20 @@ const Post = require('../models/PostModel');
 
 // Create a new post
 exports.createPost = async (req, res) => {
-  try {
-    const newPost = await Post.create(req.body);
-    res.status(201).json(newPost);
-  } catch (error) {
-    console.error('Error creating post:', error);
-    res.status(400).json({ error: 'Failed to create post' });
-  }
+  const { caption } = req.body;
+  const photo = req.file;
+  console.log(caption);
+  console.log(photo);
+  // try {
+  //   const newPost = await Post.create({
+  //     caption: caption,
+  //     photo: photo
+  //   });
+  //   res.status(201).json(newPost);
+  // } catch (error) {
+  //   console.error('Error creating post:', error);
+  //   res.status(400).json({ error: 'Failed to create post' });
+  // }
 };
 
 // Get all posts

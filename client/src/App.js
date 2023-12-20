@@ -10,12 +10,13 @@ import { useState } from "react";
 
 function App() {
   const [refresh, setRefresh] = useState(false);
+  const [modal, setModal] = useState(false);
 
   return (
-    <div className="bg-customColor flex flex-col items-center">
+    <div className={`${(modal === true)?'overflow-y-hidden h-screen':''} bg-customColor flex flex-col items-center`}>
       <Header setRefresh={setRefresh} refresh={refresh} />
       <Routes>
-        <Route path="/" exact element={<Home/>} />
+        <Route path="/" exact element={<Home  modal={modal} setModal={setModal}/>} />
         <Route path="/mynetwork" element={<MyNetwork/>} />
         <Route path="/jobs" element={<Jobs/>} />
         <Route path="/messaging" element={<Messaging/>} />
