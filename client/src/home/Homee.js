@@ -3,7 +3,8 @@ import Feed from "./Feed";
 import Sidebar from "./Sidebar"
 import Widgets from "./Widgets"
 
-function home({modal, setModal}) {
+function Homee({modal, setModal}) {
+
   return (
     <div className="flex mt-5 max-w-[1130px] space-x-6 ">
         <Sidebar/>
@@ -13,4 +14,4 @@ function home({modal, setModal}) {
 )
 }
 
-export default home
+export default Homee

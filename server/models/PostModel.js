@@ -1,10 +1,20 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-  likes: {
-    type: Number,
-    default: 0,
+  userId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required:true,
   },
+  likes: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+      },
+    },
+  ],
   comments: [
     {
       user: {

@@ -4,51 +4,72 @@ import ImageIcon from "@mui/icons-material/ImageOutlined"
 import Event from "@mui/icons-material/EventNote"
 import Calender from "@mui/icons-material/CalendarViewDay"
 import PostModal from './PostModal'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { posts } from '../store/userSlice'
+import Alert from '../assets/Alert'
 
-function Post({modal, setModal}) {
-  const [message, setMessage] = useState();
+function Post({modal, setModal,setNewFeed,newFeed}) {
+  const [alertt, setAlertt] = useState();
+  const [alerttToggle, setAlerttToggle] = useState(false);
   const inputRef = useRef();
   const [image, setImage] = useState()
   const [image0, setImage0] = useState()
   const inputKey = useRef(0);
   const [caption, setCaption] = useState('');
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.user);
+  const postAlert = useSelector((state) => state.user.postAlert);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const postData = {
-      photo: {},
-      caption: "",
-    };
-    // const formData= new FormData();
+    const formData= new FormData();
+
     if(image){
-      postData.photo = image0
+      formData.append("photo", image0)
     }
     if(caption!==""){
-      postData.caption = caption
+      formData.append("caption",caption)
     }
-    if(caption!=="" || image){
-      console.log(postData)
-      dispatch(posts(postData)).then(() => {
-        // alert("success")
-        // setModal(!modal)
-        // setCaption("");
-      })
+    if(user.user.userId){
+      formData.append("userId",user.user.userId)
+      if(user.user.token.length > 3 && (caption!=="" || image)){
+        dispatch(posts(formData)).then(() => {
+
+          setModal(!modal)
+          setNewFeed(!newFeed)
+          setCaption("");
+
+          setImage(null);
+          inputKey.current += 1;
+        })
+      } else {
+        // alert("select photo or add caption")
+        setAlertt("select photo or add caption")
+        setAlerttToggle(true)
+        }
     } else {
-      alert("select photo or add caption")
+      alert("user not logged in.!")
     }
   };
 
   const postModal = () => {
-    setModal(!modal);
+    if(user.user.token.length < 3){
+      setAlertt("Login to make a post!")
+      setAlerttToggle(true)
+    } else {
+      setModal(!modal);
+    }
   }
 
   const ImageIconClick = () => {
-    setModal(!modal);
-    inputRef.current.click();
+    if(user.user.token.length < 3){
+      setAlertt("Login to make a post!")
+      setAlerttToggle(true)
+    } else {
+      setModal(!modal);
+      inputRef.current.click();
+    }
   }
 
   const handleImageChange = (event) => {
@@ -66,17 +87,18 @@ function Post({modal, setModal}) {
 
   return (
     <form onSubmit={handleSubmit} encType='multipart/form-data'>
+      <Alert alert={alertt} alerttToggle={alerttToggle} setAlerttToggle={setAlerttToggle} />
       <div className='flex h-fit border-[1px] rounded-lg py-2 px-3 w-full flex-col bg-white shadow-sm'>
         <div className='h-1/2 flex flex-row w-full'>
 
           <div className='relative'>
-            <input ref={inputRef} className='absolute -top-[999px]' type='file' id="file-upload" name='image' accept='image/*' 
+            <input ref={inputRef} className='absolute -top-[999px]' type='file' id="file-upload" name='photo' accept='image/*' 
               onChange={handleImageChange} key={inputKey.current}/>
           </div>
 
           <Avatar className='m-1' sx={{ width: 50, height: 50 }} src="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4"/>
           <input className='outline-none cursor-pointer caret-transparent hover:bg-gray-200 border-[1px] bg-gray-100 text-gray-900 border-gray-400 m-1 rounded-full w-full pl-4' 
-          onClick={postModal} value="" type="text" placeholder="Start a post" />
+          onClick={postModal} value="" type="text" placeholder="Start a post" readOnly/>
           {modal && <PostModal caption={caption} setCaption={setCaption} inputKey={inputKey} image={image} setImage={setImage} handleSubmit={handleSubmit} inputRef={inputRef} setModal={setModal} modal={modal}/>}
         </div>
         <div className='flex w-full flex-row justify-around'>

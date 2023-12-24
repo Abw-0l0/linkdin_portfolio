@@ -5,6 +5,7 @@ const PostRoutes = require('./routes/PostRoutes')
 const UserRoutes = require('./routes/UserRoutes')
 const multer = require('multer')
 const bodyParser = require("body-parser");
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -16,7 +17,7 @@ app.use(bodyParser.urlencoded({
     extended: true
   }));
 
-  mongoose.connect('mongodb+srv://abw_0l0:inputstream12@cluster0.em87p35.mongodb.net/')
+  mongoose.connect(process.env.MONGODB_URI)
 const db = mongoose.connection;
 
 db.once("open", () => {

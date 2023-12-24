@@ -21,7 +21,7 @@ function AddToFeed() {
           logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFDTKV4IUyFOpFh5_we4BJxAbFl9GaHYL5SRLfovXmuG0DpGXUPglO6d7CQwCE0X4tDRA&usqp=CAU"
         />
         <Profiles
-          platform="Soundcloud"
+          platform="Instagram"
           username="abw_0l0"
           link="https://www.instagram.com/abw_0l0/"
           logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/2048px-Instagram_logo_2022.svg.png"

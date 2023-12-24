@@ -37,7 +37,7 @@ function PostModal({caption, setCaption,inputKey,setModal,modal,inputRef,handleS
     return (
     <div className='absolute top-0 left-0 w-full h-full'>
         <div className='flex justify-center w-full h-full'>
-            <div className='bg-white w-1/2 mt-8 z-50 h-3/4 rounded-xl overflow-hidden flex flex-col'>
+            <div className='bg-white w-1/2 mt-8 z-40 h-3/4 rounded-xl overflow-hidden flex flex-col'>
 
                 <div className='flex w-full h-1/5 flex-row p-5 items-center'>
                     <Avatar className='m-1' sx={{ width: 60, height: 60 }} src="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4"/>
@@ -85,7 +85,7 @@ function PostModal({caption, setCaption,inputKey,setModal,modal,inputRef,handleS
 
             </div>
         </div>
-        <div className='bg-gray-600 opacity-20 absolute top-0 z-40 left-0 w-full h-full'></div>
+        <div className='bg-gray-600 opacity-20 absolute top-0 z-30 left-0 w-full h-full'></div>
     </div>
   )
 }

@@ -19,8 +19,6 @@ function Header({setRefresh,refresh}) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  console.log(user)
-
   const handleClick = () => {
     navigate('/signup')
     setPage("");
@@ -38,7 +36,7 @@ function Header({setRefresh,refresh}) {
   }
 
   return (
-    <div className=' top-0 sticky block w-full z-40'>
+    <div className=' top-0 sticky block w-full z-30'>
       <div className='flex justify-center border-b-[0.1px] border-solid border-gray-300 w-full h-[53px] bg-white'>
 
         <div className='max-w-[1130px] w-full top-0 sticky flex justify-between px-2'>
@@ -59,7 +57,7 @@ function Header({setRefresh,refresh}) {
               <HeaderOption Icon={BusinessCenterIcon} title='Jobs' page={page} setPage={setPage}/>
               <HeaderOption Icon={ChatIcon} title='Messaging' page={page} setPage={setPage}/>
               <HeaderOption Icon={NotificationsIcon} title='Notifications' page={page} setPage={setPage}/>
-              <HeaderOption avatar ="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4" title='Me'/>
+              <HeaderOption page={page} setPage={setPage} avatar ="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4" title='Me'/>
             </div>
             <div className='flex items-start pl-2'>
               <div className=' flex flex-col object-contain items-center w-[85px] py-[10px] text-gray-500 hover:text-black cursor-pointer -mt-1'>

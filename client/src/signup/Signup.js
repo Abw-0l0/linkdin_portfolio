@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import axios from '../axios'
+import { signup } from '../store/userSlice';
+import { useDispatch } from 'react-redux';
 
 function Signup({setToggel}) {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function Signup({setToggel}) {
       });
     const [confirmpass, setConfirmpass] = useState('')
     const [err, setErr] = useState(null)
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,16 +21,10 @@ function Signup({setToggel}) {
         setErr(null)
 
         if(formData.password === confirmpass){
-            try {
-              const response = await axios.post('/user/signup', formData);
-          
-              console.log('Signup successful:', response.data);
-            } catch (error) {
-              console.error('Error during signup:', error.response.data.error);
-              setErr(error.response.data.error)
-            }
+          dispatch(signup(formData))
+          setToggel(false)
         } else {
-            console.log("pass didn't matched")
+            setErr("pass didn't matched")
         }
       
     };

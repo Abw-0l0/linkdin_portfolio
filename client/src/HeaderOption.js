@@ -28,7 +28,8 @@ function HeaderOption({ avatar,  Icon, title, page, setPage }) {
       setPage('Notifications')
     }
     else {
-      setPage("")
+      navigate('/')
+      setPage('Home')
     }
   }
   return (
