@@ -7,14 +7,15 @@ import Notifications from "./notification/Notifications";
 import Signuppage from "./signup/Signuppage";
 import { useState } from "react";
 import Home from "./home/Homee";
+import PpModal from "./home/PpModal";
 
 function App() {
-  const [refresh, setRefresh] = useState(false);
   const [modal, setModal] = useState(false);
+  const [ppModal, setppModal] = useState(false);
 
   return (
-    <div className={`${(modal === true)?'overflow-y-hidden h-screen':''} bg-customColor w-screen flex flex-col items-center`}>
-      <Header setRefresh={setRefresh} refresh={refresh} />
+    <div className={`${(modal === true)||(ppModal === true)?'overflow-y-hidden h-screen':''} bg-customColor w-screen flex flex-col items-center`}>
+      <Header ppModal={ppModal} setppModal={setppModal} />
       <Routes>
         <Route path="/" exact element={<Home  modal={modal} setModal={setModal}/>} />
         <Route path="/mynetwork" element={<MyNetwork/>} />
@@ -23,6 +24,7 @@ function App() {
         <Route path="/notifications" element={<Notifications/>} />
         <Route path="/signup" element={<Signuppage/>} />
       </Routes>
+      {ppModal?<PpModal ppModal={ppModal} setppModal={setppModal} />:<></>}
     </div>
   );
 }

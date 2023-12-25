@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import setAuthToken from './auth/authService';
 import {userActions} from './store/userSlice';
 
-function Header({setRefresh,refresh}) {
+function Header({ppModal, setppModal}) {
   const [page, setPage] = useState('Home');
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -57,7 +57,7 @@ function Header({setRefresh,refresh}) {
               <HeaderOption Icon={BusinessCenterIcon} title='Jobs' page={page} setPage={setPage}/>
               <HeaderOption Icon={ChatIcon} title='Messaging' page={page} setPage={setPage}/>
               <HeaderOption Icon={NotificationsIcon} title='Notifications' page={page} setPage={setPage}/>
-              <HeaderOption page={page} setPage={setPage} avatar ="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4" title='Me'/>
+              <HeaderOption ppModal={ppModal} setppModal={setppModal} page={page} setPage={setPage} avatar ="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4" title='Me'/>
             </div>
             <div className='flex items-start pl-2'>
               <div className=' flex flex-col object-contain items-center w-[85px] py-[10px] text-gray-500 hover:text-black cursor-pointer -mt-1'>

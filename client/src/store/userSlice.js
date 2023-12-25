@@ -44,6 +44,11 @@ export const deleteComment = createAsyncThunk('/deletecomment',async(data)=>{
   return res.data;
 })
 
+export const deletePost = createAsyncThunk('/deletepost',async(data)=>{
+  const res = await axios.post("/post/deletepost",data);
+  return res.data;
+})
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {

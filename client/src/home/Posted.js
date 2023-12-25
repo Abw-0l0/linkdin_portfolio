@@ -4,12 +4,11 @@ import Like from "@mui/icons-material/ThumbUpOutlined"
 import Comment from "@mui/icons-material/MessageOutlined"
 import Repost from '@mui/icons-material/Loop';
 import Send from "@mui/icons-material/ArrowForwardSharp"
-import { FaPlus } from 'react-icons/fa'
 import URL from '../functions/Url';
 import moment from 'moment'
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import { like } from '../store/userSlice';
+import { deletePost, like } from '../store/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ThumbUpOffAltTwoToneIcon from '@mui/icons-material/ThumbUpOffAltTwoTone';
 import Comments from './Comments';
@@ -17,7 +16,9 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 function Posted({newFeed,setNewFeed,post}) {
   const [agoDate,setAgoDate] = useState();
+  const [postDelToggle,setPostDelToggle] = useState(false);
   const [commentSection,setCommentSection] = useState(false);
+  const [postid,setpostid] = useState({postId:""});
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user);
   const [likedPost, setLikedPost] = useState({
@@ -58,6 +59,18 @@ function Posted({newFeed,setNewFeed,post}) {
     setCommentSection(!commentSection)
   }
 
+  const handlepostDel = (e) => {
+    e.preventDefault();
+
+    if(user.user.userId){
+      postid.postId = post._id
+      dispatch(deletePost(postid)).then(()=> {
+        setNewFeed(!newFeed);
+        setPostDelToggle(!postDelToggle)
+      })
+    }
+  }
+
   return (
     <div className='flex h-fit border-[1px] rounded-lg mb-2 pt-2 pb-1 w-full flex-col bg-white shadow-sm'>
 
@@ -73,9 +86,18 @@ function Posted({newFeed,setNewFeed,post}) {
             </div>
         </div>
         <div className='flex text-gray-600 rounded-md h-full w-fit '>
+          <MoreHorizIcon onClick={() => setPostDelToggle(!postDelToggle)} className='pr-1 cursor-pointer' fontSize='large' />
+
+            {(postDelToggle)?
+                <div className="relative">
+                  <div className="absolute bg-white right-0 mt-7 border-[2px] shadow-md w-fit h-fit rounded-lg">
+                    <p onClick={handlepostDel} className="pr-7 pl-3 py-2 hover:bg-gray-100 cursor-pointer text-sm font-medium text-gray-700">Delete</p>
+                  </div>
+                </div>
+            :<></>}
+
             {/* <button className='py-1 px-2 flex flex-row items-center font-medium'> */}
               {/* <FaPlus className='pr-1' />Follow */}
-              <MoreHorizIcon className='pr-1 cursor-pointer' fontSize='large' />
             {/* </button> */}
         </div>
       </div>

@@ -1,6 +1,7 @@
 const Post = require('../models/PostModel');
-const User = require('../models/UserModel');
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
 
 // Create a new post
 exports.createPost = async (req, res) => {
@@ -137,6 +138,42 @@ exports.deleteCommentPost = async (req, res) => {
 
   } catch (error) {
     console.error('Error commenting post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+
+};
+
+exports.deletePost = async (req, res) => {
+  const {postId} = req.body;
+  console.log(postId)
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
+      return res.status(400).json({ error: 'Invalid postId or userId format' });
+    }
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    if (post.photo) {
+      const filePath = path.join(__dirname, '../uploads', post.photo);
+      console.log('File path:', filePath);
+      // Check if the file exists before attempting to delete
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+        console.log(`Photo deleted: ${post.photo}`);
+      } else {
+        console.log(`File not found: ${post.photo}`);
+      }
+    }
+
+    const deletedPost = await Post.findOneAndDelete({ _id: postId });
+    res.json(deletedPost);
+  } catch (error) {
+    console.error('Error deleting post:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 

@@ -15,7 +15,7 @@ function Feed({modal, setModal}) {
 
   useEffect(() => {
     dispatch(feed())
-    console.log(feedR);
+    // console.log(feedR);
   },[newFeed])
 
   const handleDropDown = () => {

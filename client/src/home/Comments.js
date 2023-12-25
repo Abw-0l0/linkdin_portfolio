@@ -40,12 +40,14 @@ function Comments({post,newFeed,setNewFeed}) {
         setDeleteToggel((prevToggle) => (prevToggle === i ? null : i))
     }
 
-    const commentDelete = (i) => {
+    const commentDelete = (i,a) => {
         delet.postId = post._id;
         delet.commentId = i;
-        dispatch(deleteComment(delet)).then(() => {
-            setNewFeed(!newFeed);
-        });
+        if(user.user.userId === a.user._id){
+            dispatch(deleteComment(delet)).then(() => {
+                setNewFeed(!newFeed);
+            });
+        }
     }
 
     const handleLoadAllComments = () => {
@@ -74,9 +76,9 @@ function Comments({post,newFeed,setNewFeed}) {
                             </div>
                             <MoreHorizIcon onClick={() => handleToggle(a._id)} className='text-gray-500 cursor-pointer'/>
                             {(deleteToggel===a._id)?
-                                  <div className="relative">
+                                <div className="relative">
                                   <div className="absolute bg-white right-0 mt-5 border-[2px] shadow-md w-fit h-fit rounded-sm">
-                                    <p onClick={()=> commentDelete(a._id)} className="px-2 hover:bg-gray-100 cursor-pointer text-sm font-medium text-gray-700">Delete</p>
+                                    <p onClick={()=> commentDelete(a._id,a)} className="px-2 hover:bg-gray-100 cursor-pointer text-sm font-medium text-gray-700">Delete</p>
                                   </div>
                                 </div>
                           :<></>}

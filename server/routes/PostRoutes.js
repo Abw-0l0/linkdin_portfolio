@@ -34,6 +34,9 @@ router.post('/comment', postController.commentPost);
 // comment on post
 router.post('/deletecomment', postController.deleteCommentPost);
 
+// delete post
+router.post('/deletepost', postController.deletePost);
+
 // Get a specific post by ID
 router.get('/posts/:postId', postController.getPostById);
 
