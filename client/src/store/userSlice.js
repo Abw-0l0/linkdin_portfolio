@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../axios'
 import setAuthToken from '../auth/authService'
 
-const userData = localStorage.getItem("user")!==null ? JSON.parse(localStorage.getItem("user")):{email: "", token: "", userId: "", username: ""} 
+const userData = localStorage.getItem("user")!==null ? JSON.parse(localStorage.getItem("user")):{email: "", token: "", userId: "", username: "", photo:""} 
 const config = {
   headers:{
       authorization: `Bearer ${userData.token}`,
@@ -15,8 +15,13 @@ export const signup = createAsyncThunk('/signup',async(user)=>{
 })
 
 export const login = createAsyncThunk('/login',async(user)=>{
-    const res = await axios.post("/user/login",user);
-    return res.data;
+  const res = await axios.post("/user/login",user);
+  return res.data;
+})
+
+export const userpp = createAsyncThunk('/userpp',async(user)=>{
+  const res = await axios.post("/user/userpp",user);
+  return res.data;
 })
 
 export const posts = createAsyncThunk('/posts',async(data)=>{
@@ -62,7 +67,7 @@ const userSlice = createSlice({
         state.user = action.payload
     },
     clearUser(state, action){
-      state.user = {email: "", token: "", userId: "", username: ""}
+      state.user = {email: "", token: "", userId: "", username: "", photo: ""}
     },
   },
   extraReducers: (builder) => {
@@ -70,8 +75,9 @@ const userSlice = createSlice({
       console.log(payload)
     })
     builder.addCase(login.fulfilled, (state, { payload }) => {
+      console.log(payload)
       state.user = payload;
-      localStorage.setItem('user', JSON.stringify({ email: payload.email, token: payload.token, userId: payload.userId, username: payload.username}))
+      localStorage.setItem('user', JSON.stringify({ email: payload.email, token: payload.token, userId: payload.userId, username: payload.username, photo: payload.photo}))
       setAuthToken(payload.token)
     })
     builder.addCase(posts.fulfilled, (state, { payload }) => {
@@ -93,6 +99,16 @@ const userSlice = createSlice({
     })
     builder.addCase(comment.fulfilled, (state, { payload }) => {
       console.log("extrareducer:", payload);
+    })
+    builder.addCase(userpp.fulfilled, (state, { payload }) => {
+      // state.user = payload;
+      console.log(payload.user)
+      state.user.photo = payload.user.photo;
+      const existingUser = JSON.parse(localStorage.getItem('user')) || {};
+      existingUser.photo = payload.user.photo
+      localStorage.setItem('user', JSON.stringify(existingUser));
+      
+      // localStorage.setItem('user', JSON.stringify({ photo: payload.photo}))
     })
   },
 

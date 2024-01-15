@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Avatar } from "@mui/material";
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import { useNavigate } from 'react-router-dom';
-import PpModal from './home/PpModal';
+import setAuthToken from './auth/authService';
+import {userActions} from './store/userSlice';
+import { useDispatch } from 'react-redux';
 
 function HeaderOption({ avatar,  Icon, title, page, setPage, ppModal, setppModal }) {
   const navigate = useNavigate();
   const [toggle, setToggle] = useState();
+  const dispatch = useDispatch();
 
   const RouteChange = () => {
     if(title==="Home"){
@@ -40,6 +43,12 @@ function HeaderOption({ avatar,  Icon, title, page, setPage, ppModal, setppModal
     setppModal(!ppModal);
   }
 
+  const handleLogout = () => {
+    setAuthToken(null);
+    localStorage.removeItem('user');
+    dispatch(userActions.clearUser());
+  }
+
   return (
     <>
     <div onClick={RouteChange}
@@ -55,7 +64,7 @@ function HeaderOption({ avatar,  Icon, title, page, setPage, ppModal, setppModal
       <div className="relative mt-14">
         <div className="absolute bg-white right-0 border-[2px] shadow-md py-1 w-fit h-fit rounded-lg">
           <p onClick={setPp} className={`whitespace-nowrap pl-3 py-2 pr-24 hover:bg-gray-100 cursor-pointer text-sm font-medium text-gray-700`}>Set profile picture</p>
-          <p className={`whitespace-nowrap pl-3 py-2 pr-24 hover:bg-gray-100 cursor-pointer text-sm font-medium text-gray-700`}>Sign Out</p>
+          <p onClick={handleLogout} className={`whitespace-nowrap pl-3 py-2 pr-24 hover:bg-gray-100 cursor-pointer text-sm font-medium text-gray-700`}>Sign Out</p>
         </div>
       </div>
     :
