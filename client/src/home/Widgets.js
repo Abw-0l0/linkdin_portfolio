@@ -4,7 +4,7 @@ import Animation from "./Animation";
 
 function Widgets() {
   return (
-    <div className="flex flex-col flex-grow-1 flex-shrink-1 basis-[28%] pb-2">
+    <div className="flex w-full flex-col basis-[28%] pb-2">
       <AddToFeed />
       <div className="flex flex-col w-full sticky top-16">
         <Animation />

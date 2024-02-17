@@ -14,17 +14,25 @@ function App() {
   const [ppModal, setppModal] = useState(false);
 
   return (
-    <div className={`${(modal === true)||(ppModal === true)?'overflow-y-hidden h-screen':''} bg-customColor w-screen flex flex-col items-center`}>
+    <div
+      className={`${
+        modal === true || ppModal === true ? "overflow-y-hidden h-screen" : ""
+      } bg-customColor w-full flex flex-col items-center`}
+    >
       <Header ppModal={ppModal} setppModal={setppModal} />
       <Routes>
-        <Route path="/" exact element={<Home  modal={modal} setModal={setModal}/>} />
-        <Route path="/mynetwork" element={<MyNetwork/>} />
-        <Route path="/jobs" element={<Jobs/>} />
-        <Route path="/messaging" element={<Messaging/>} />
-        <Route path="/notifications" element={<Notifications/>} />
-        <Route path="/signup" element={<Signuppage/>} />
+        <Route
+          path="/"
+          exact
+          element={<Home modal={modal} setModal={setModal} />}
+        />
+        <Route path="/mynetwork" element={<MyNetwork />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/messaging" element={<Messaging />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/signup" element={<Signuppage />} />
       </Routes>
-      {ppModal?<PpModal ppModal={ppModal} setppModal={setppModal} />:<></>}
+      {ppModal ? <PpModal ppModal={ppModal} setppModal={setppModal} /> : <></>}
     </div>
   );
 }
