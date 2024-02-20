@@ -4,6 +4,8 @@ import ImageIcon from "@mui/icons-material/ImageOutlined";
 import Event from "@mui/icons-material/EventNote";
 import CakeIcon from "@mui/icons-material/Cake";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useSelector } from "react-redux";
+import prl from "../functions/Url";
 
 function PostModal({
   caption,
@@ -28,6 +30,7 @@ function PostModal({
     setCaption(event.target.value);
     adjustTextareaHeight();
   };
+  const user = useSelector((state) => state.user);
 
   const adjustTextareaHeight = () => {
     const textarea = document.getElementById("myTextarea");
@@ -51,11 +54,15 @@ function PostModal({
             <Avatar
               className="m-1"
               sx={{ width: 60, height: 60 }}
-              src="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4"
+              src={
+                user.user.photo !== ""
+                  ? `${prl}/uploads/users/` + user.user.photo
+                  : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fuser-profile&psig=AOvVaw3UEPY9UhAHgsj4VqT3BFoo&ust=1708522732963000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOjzuqeFuoQDFQAAAAAdAAAAABAE"
+              }
             />
             <div className="flex flex-col w-full text-gray-500 items-start px-2">
               <h2 className="text-xl font-semibold text-gray-700 whitespace-nowrap">
-                Malik Riaz Khan
+                {user.user.username}
               </h2>
               <h4 className="text-sm text-gray-400">Post to Anyone</h4>
             </div>

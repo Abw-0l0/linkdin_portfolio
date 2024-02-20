@@ -3,6 +3,7 @@ import Avatar from 'react-avatar-edit'
 import { useDispatch, useSelector } from 'react-redux';
 import { userpp } from '../store/userSlice';
 import URL from '../functions/Url';
+import { base64StringToBlob } from 'blob-util';
 
 function PpModal({ppModal, setppModal}) {
     const [imgCrop, setimgCrop] = useState();
@@ -33,15 +34,18 @@ function PpModal({ppModal, setppModal}) {
 
         if (imgCrop) {
             // Convert base64 data to Blob
-            const base64Data = imgCrop.split(',')[1];
-            const blob = new Blob([atob(base64Data)], { type: 'image/jpg' });
-      
+ 
+            const contentType = 'image/png';
+            const b64Data = imgCrop.split(',')[1];
+            
+            const blob = base64StringToBlob(b64Data, contentType);
+
             // Create a File object
-            const file = new File([blob], "avatar.jpg", { type: 'image/jpg' });
+            const file = new File([blob], "avatar.png", { type: 'image/png' });
       
             // Append the File object to FormData
             // console.log(imgCrop);
-            console.log(file);
+            console.log(imgCrop);
             formData.append('photo', file);
       
             if (user.user.userId) {

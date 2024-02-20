@@ -7,6 +7,7 @@ import PostModal from './PostModal'
 import { useDispatch, useSelector } from 'react-redux';
 import { posts } from '../store/userSlice'
 import Alert from '../assets/Alert'
+import prl from "../functions/Url";
 
 function Post({modal, setModal,setNewFeed,newFeed}) {
   const [alertt, setAlertt] = useState();
@@ -96,7 +97,11 @@ function Post({modal, setModal,setNewFeed,newFeed}) {
               onChange={handleImageChange} key={inputKey.current}/>
           </div>
 
-          <Avatar className='m-1' sx={{ width: 50, height: 50 }} src="https://avatars.githubusercontent.com/u/75667121?s=400&u=2147ca1b438f9bff4717d0c9e058ba77e07f5a6a&v=4"/>
+          <Avatar className='m-1' sx={{ width: 50, height: 50 }} src={
+                user.user.photo !== ""
+                  ? `${prl}/uploads/users/` + user.user.photo
+                  : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fuser-profile&psig=AOvVaw3UEPY9UhAHgsj4VqT3BFoo&ust=1708522732963000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOjzuqeFuoQDFQAAAAAdAAAAABAE"
+              }/>
           <input className='outline-none cursor-pointer caret-transparent hover:bg-gray-200 border-[1px] bg-gray-100 text-gray-900 border-gray-400 m-1 rounded-full w-full pl-4' 
           onClick={postModal} value="" type="text" placeholder="Start a post" readOnly/>
           {modal && <PostModal caption={caption} setCaption={setCaption} inputKey={inputKey} image={image} setImage={setImage} handleSubmit={handleSubmit} inputRef={inputRef} setModal={setModal} modal={modal}/>}

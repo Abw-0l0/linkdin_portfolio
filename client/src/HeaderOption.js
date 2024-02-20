@@ -4,7 +4,8 @@ import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined
 import { useNavigate } from "react-router-dom";
 import setAuthToken from "./auth/authService";
 import { userActions } from "./store/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import URL from "./functions/Url";
 
 function HeaderOption({
   avatar,
@@ -18,6 +19,7 @@ function HeaderOption({
   const navigate = useNavigate();
   const [toggle, setToggle] = useState();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const RouteChange = () => {
     if (title === "Home") {
@@ -38,6 +40,7 @@ function HeaderOption({
     } else {
       // navigate('/')
       setToggle(!toggle);
+      console.log(user.user);
     }
   };
 
@@ -65,7 +68,11 @@ function HeaderOption({
           <Avatar
             className="object-contain"
             sx={{ width: 24, height: 24 }}
-            src={avatar}
+            src={
+              user.user.photo !== ""
+                ? `${URL}/uploads/users/` + user.user.photo
+                : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fuser-profile&psig=AOvVaw3UEPY9UhAHgsj4VqT3BFoo&ust=1708522732963000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOjzuqeFuoQDFQAAAAAdAAAAABAE"
+            }
           />
         )}
         {title !== "Me" ? (
