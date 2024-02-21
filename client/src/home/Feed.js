@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { feed } from "../store/userSlice";
 
 function Feed({ modal, setModal }) {
-  const [uploadedData, setUploadedData] = useState([]);
+  // const [uploadedData, setUploadedData] = useState([]);
   const dispatch = useDispatch();
   const feedR = useSelector((state) => state.user.feed);
   const [newFeed, setNewFeed] = useState(true);
